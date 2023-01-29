@@ -3,8 +3,9 @@ accounting_group = ligo.prod.o2.cbc.pe.lalinferencerapid
 universe = vanilla
 getenv = true
 
-executable = /home/deep.chatterjee/.conda/envs/ray-test/bin/ray
-arguments = "start --head --block --port=6379 --num-cpus=1 --num-gpus=0"
+executable = /home/ethan.marx/miniconda3/envs/hp-search/bin/ray 
+arguments = "start --head --block --port=6379 --num-cpus=1 --num-gpus=0 --temp-dir /home/ethan.marx/ray"
+#requirements = Name=="ldas-pcdev11.ligo.caltech.edu" || Name=="ldas-pcdev12.ligo.caltech.edu" || Name=="ldas-pcdev10.ligo.caltech.edu" || Name=="ldas-pcdev3.ligo.caltech.edu"
 log = condor.log
 output = condor.out
 error = condor.err
@@ -14,11 +15,13 @@ description = ray-server
 queue
 
 
-executable = /home/deep.chatterjee/.conda/envs/ray-test/bin/python3.9
-arguments = "/home/deep.chatterjee/ray-tune/work.py"
-description = test-work
-request_cpus = 1
-output = worker.out
-error = worker.err
-log = worker.log
-queue
+executable = /home/ethan.marx/forks/APwML-Hackathon-HP-Search/worker.py
+#arguments = /home/ethan.marx/forks/APwML-Hackathon-HP-Search/worker.py
+#requirements = Name=="ldas-pcdev11.ligo.caltech.edu" || Name=="ldas-pcdev12.ligo.caltech.edu" || Name=="ldas-pcdev10.ligo.caltech.edu" || Name=="ldas-pcdev3.ligo.caltech.edu"
+#description = test-work
+request_cpus = 2
+# request_gpus = 1
+output = worker-$(Process).out
+error = worker-$(Process).err
+log = worker-$(Process).log
+queue 1
