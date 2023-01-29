@@ -17,11 +17,11 @@ def generate_dummy_dataloader(n_samples: int):
     
 
 class Model(torch.nn.Module):
-    def __init__(self, input_size: int, hidden_size: int, output_size: int):
+    def __init__(self, hidden_size: int):
         super().__init__()
-        self.fc1 = torch.nn.Linear(input_size, hidden_size)
+        self.fc1 = torch.nn.Linear(1, hidden_size)
         self.bn = torch.nn.BatchNorm1d(hidden_size)
-        self.fc2 = torch.nn.Linear(hidden_size, output_size)
+        self.fc2 = torch.nn.Linear(hidden_size, 1)
     
     def forward(self, x):
         x = torch.relu(self.fc1(x))
@@ -34,12 +34,17 @@ def train(
     model: torch.nn.Module,
     train_loader: Iterable,
     val_loader: Iterable,
+    hidden_size: int,
     n_epochs: int,
     lr: float,
     device: str = "cpu",
 ):
+    model = model(hidden_size)
+    model.to(device)
+
     criterion = torch.nn.functional.binary_cross_entropy_with_logits
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+
     train_losses = []
     val_losses = []
     for epoch in range(n_epochs):
@@ -47,12 +52,12 @@ def train(
         model.train()
         train_loss = 0
         for data, target in train_loader:
+            data.to(device), target.to(device)
             optimizer.zero_grad()
             output = model(data)
             loss = criterion(output, target)
             loss.backward()
             optimizer.step()
-            
             train_loss += loss.item()
 
         # perform  validation
@@ -60,12 +65,13 @@ def train(
         val_loss = 0
         with torch.no_grad():
             for data, target in val_loader:
+                data.to(device), target.to(device)
                 output = model(data)
                 val_loss += criterion(output, target).item()
         logging.info("Train loss: {}, Val loss: {}".format(train_loss, val_loss))
         train_losses.append(train_loss)
         val_losses.append(val_loss)
 
-    return train_losses, val_losses
+    return max(val_losses)
 
     
