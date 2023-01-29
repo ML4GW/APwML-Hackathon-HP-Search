@@ -1,0 +1,15 @@
+JobBatchName = my-ray-stuff
+accounting_group = ligo.prod.o2.cbc.pe.lalinferencerapid
+universe = vanilla
+getenv = true
+
+executable = /home/ethan.marx/miniconda3/envs/hp-search/bin/ray 
+arguments = "start --head --block --port=6379 --num-cpus=1 --num-gpus=0 --temp-dir /home/ethan.marx/ray"
+#requirements = Name=="ldas-pcdev11.ligo.caltech.edu" || Name=="ldas-pcdev12.ligo.caltech.edu" || Name=="ldas-pcdev10.ligo.caltech.edu" || Name=="ldas-pcdev3.ligo.caltech.edu"
+log = condor.log
+output = condor.out
+error = condor.err
+request_disk = 1GB
+request_cpus = 1
+description = ray-server
+queue
