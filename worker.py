@@ -1,4 +1,4 @@
-#!/usr/bin/env
+#!/home/ethan.marx/miniconda3/envs/hp-search/bin/python
 print("hey")
 import os, re, subprocess, time
 from pathlib import Path
@@ -29,9 +29,7 @@ else:
 
 print(f"Connecting to ray on {machine}")
 
-ray.init(address=f"ray://{machine}:10001", _temp_dir = "/home/ethan.marx/ray/")
-print("Connected")
-while True:
-   time.sleep(1) 
-#subprocess.run(f'/home/ethan.marx/miniconda3/envs/hp-search/bin/ray start --block --address={machine}:6379 --temp-dir /home/ethan.marx/ray/', shell=True)
+#ray.init(address=f"ray://{machine}:10001", _temp_dir = "/home/ethan.marx/ray/")
+subprocess.run(f'/home/ethan.marx/miniconda3/envs/hp-search/bin/ray start --block --address={machine}:6379 --temp-dir /home/ethan.marx/ray/', shell=True)
 
+print("Connected")

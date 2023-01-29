@@ -13,15 +13,3 @@ request_disk = 1GB
 request_cpus = 1
 description = ray-server
 queue
-
-
-executable = /home/ethan.marx/forks/APwML-Hackathon-HP-Search/worker.py
-#arguments = /home/ethan.marx/forks/APwML-Hackathon-HP-Search/worker.py
-#requirements = Name=="ldas-pcdev11.ligo.caltech.edu" || Name=="ldas-pcdev12.ligo.caltech.edu" || Name=="ldas-pcdev10.ligo.caltech.edu" || Name=="ldas-pcdev3.ligo.caltech.edu"
-#description = test-work
-request_cpus = 2
-# request_gpus = 1
-output = worker-$(Process).out
-error = worker-$(Process).err
-log = worker-$(Process).log
-queue 1

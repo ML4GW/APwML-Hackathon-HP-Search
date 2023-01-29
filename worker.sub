@@ -1,0 +1,11 @@
+executable = /home/ethan.marx/forks/APwML-Hackathon-HP-Search/worker.py
+accounting_group = ligo.prod.o2.cbc.pe.lalinferencerapid
+universe = vanilla
+getenv = true
+request_disk = 0
+request_cpus = 2
+# request_gpus = 1
+output = worker-$(Process).out
+error = worker-$(Process).err
+log = worker-$(Process).log
+queue
