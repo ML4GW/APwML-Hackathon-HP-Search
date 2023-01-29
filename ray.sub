@@ -1,0 +1,24 @@
+JobBatchName = my-ray-stuff
+accounting_group = ligo.prod.o2.cbc.pe.lalinferencerapid
+universe = vanilla
+getenv = true
+
+executable = /home/deep.chatterjee/.conda/envs/ray-test/bin/ray
+arguments = "start --head --block --port=6379 --num-cpus=1 --num-gpus=0"
+log = condor.log
+output = condor.out
+error = condor.err
+request_disk = 1GB
+request_cpus = 1
+description = ray-server
+queue
+
+
+executable = /home/deep.chatterjee/.conda/envs/ray-test/bin/python3.9
+arguments = "/home/deep.chatterjee/ray-tune/work.py"
+description = test-work
+request_cpus = 1
+output = worker.out
+error = worker.err
+log = worker.log
+queue
