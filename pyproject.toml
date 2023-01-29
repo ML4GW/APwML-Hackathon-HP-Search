@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "trainer"
+version = "0.1.0"
+description = ""
+authors = ["ethan.marx <ethan.marx@ligo.org>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
