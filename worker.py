@@ -30,6 +30,6 @@ else:
 print(f"Connecting to ray on {machine}")
 
 #ray.init(address=f"ray://{machine}:10001", _temp_dir = "/home/ethan.marx/ray/")
-subprocess.run(f'/home/ethan.marx/miniconda3/envs/hp-search/bin/ray start --block --address={machine}:6379 --temp-dir /home/ethan.marx/ray/', shell=True)
+subprocess.run(f'/home/ethan.marx/miniconda3/envs/hp-search/bin/ray start --block --num-cpus 2 --address={machine}:6379 --temp-dir /home/ethan.marx/ray/', shell=True)
 
 print("Connected")

@@ -8,4 +8,4 @@ request_cpus = 2
 output = worker-$(Process).out
 error = worker-$(Process).err
 log = worker-$(Process).log
-queue
+queue 2

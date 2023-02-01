@@ -1,5 +1,5 @@
-import ray
+from ray import tune
 
 search_space = {
-    "lr" : ray.tune.uniform(1e-5, 1e-3)
+    "lr" : tune.uniform(1e-5, 1e-3)
 }

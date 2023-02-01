@@ -93,7 +93,7 @@ def main():
         help="Parameter server API endpoint"
     )
     args, remainder = parser.parse_known_args()
-    ray.init(args.address)
+    ray.init("ray://" + args.address)
 
     # find out the names of the hyperparameters we'll
     # be searching over and remove them from the
@@ -148,12 +148,22 @@ def main():
     def objective(config):
         sys.path.append("/home/ethan.marx/forks/APwML-Hackathon-HP-Search")
         config.update(train_args) 
+        
         return train_func(**config)
 
      
-    tuner = tune.Tuner(objective, param_space=search_space)
+    tuner = tune.Tuner(
+        objective, 
+        tune_config=tune.TuneConfig(
+            num_samples=20,
+        ),
+        param_space=search_space
+    
+    )
     tuner.fit()
 
 
 if __name__ == "__main__":
     main()
+
+# 

@@ -45,12 +45,12 @@ def train(
     model = Model(hidden_size)
     model.to(device)
 
-    time.sleep(600)
     criterion = torch.nn.functional.binary_cross_entropy_with_logits
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
     train_losses = []
     val_losses = []
+    print(n_epochs)
     for epoch in range(n_epochs):
         # perform training
         model.train()
@@ -76,6 +76,6 @@ def train(
         train_losses.append(train_loss)
         val_losses.append(val_loss)
 
-    return max(val_losses)
+    return min(val_losses)
 
     
