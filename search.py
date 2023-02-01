@@ -93,7 +93,7 @@ def main():
         help="Parameter server API endpoint"
     )
     args, remainder = parser.parse_known_args()
-    ray.init(args.address)
+    ray.init('ray://'+args.address)
 
     # find out the names of the hyperparameters we'll
     # be searching over and remove them from the
